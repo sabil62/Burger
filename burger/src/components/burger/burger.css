@@ -3,4 +3,36 @@
   width: 400px;
   overflow: scroll;
   text-align: center;
+  display: flex;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.burgerSide {
+  height: 30px;
+  width: 100%;
+  box-shadow: 2px 2px solid black;
+  border: 2px dashed black;
+  border-radius: 2rem;
+  background-color: aqua;
+  color: red;
+  box-sizing: border-box;
+  padding: 22px;
+  margin: auto;
+}
+
+@media (min-width: 500px) and (min-height: 401px) {
+  .burger {
+    width: 450px;
+    height: 400px;
+  }
+}
+
+@media (min-width: 1000px) and (min-height: 700px) {
+  .burger {
+    width: 500px;
+    height: 450px;
+  }
 }
