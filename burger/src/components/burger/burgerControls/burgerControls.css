@@ -1,5 +1,22 @@
 .burgerControlss {
   padding: 2rem 0rem;
-  background-color: rgb(233, 162, 70);
+  background-color: rgb(228, 159, 69);
   margin-top: 2rem;
+}
+.order-now {
+  padding: 0.7rem 1.6rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  border-radius: 1rem;
+  background-color: rgb(248, 248, 154);
+  color: rgb(175, 154, 154);
+  border: 2px solid rgba(71, 70, 70, 0.548);
+  transition: transform 0.2s ease;
+  outline: none;
+}
+.order-now:hover {
+  background-color: yellow;
+}
+.order-now:active {
+  transform: scale(0.9);
 }

@@ -1,0 +1,16 @@
+.upper-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  width: 100%;
+  margin: auto;
+  z-index: 300;
+}
+.modal {
+  padding: 1.6rem;
+  border: 2px solid rgba(233, 221, 221, 0.363);
+  background-color: rgba(16, 129, 124, 0.315);
+  width: 400px;
+  transform: translate(-50%, -50%);
+}

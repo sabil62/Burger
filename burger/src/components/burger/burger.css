@@ -1,14 +1,10 @@
 .burger {
-  height: 400px;
-  width: 400px;
+  height: 350px;
+  width: 350px;
   overflow: scroll;
   text-align: center;
-  display: flex;
+
   margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 .burgerSide {
   height: 30px;

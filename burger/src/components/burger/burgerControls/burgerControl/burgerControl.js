@@ -5,11 +5,24 @@ const burgerControl = (props) => {
   return (
     <div className="burgerControl">
       <div className="insideButtonControl">
-        <span style={{ textTransform: "capitalize", width: "120px" }}>
+        <span style={{ textTransform: "capitalize", fontWeight: 700 }}>
           {props.type}
         </span>
-        <span className="controlButton add">Add</span>
-        <span className="controlButton subtract">Subtract</span>
+        <span className="controlButton add" onClick={props.onAdd}>
+          Add
+        </span>
+        <button
+          className={
+            props.disables
+              ? "controlButton subtract-disable"
+              : "controlButton subtract"
+          }
+          onClick={props.onSubtract}
+          disabled={props.disables}
+          // disabled={props.onNegativeIngredients}
+        >
+          Subtract
+        </button>
       </div>
     </div>
   );
