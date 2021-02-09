@@ -1,0 +1,31 @@
+.buttonControl {
+  width: 100%;
+  margin: auto;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.insideButtonControl {
+  margin: 26px 0;
+}
+.controlButton {
+  padding: 8px 16px;
+  margin: 0px 14px;
+  border: 1px solid rgba(31, 30, 30, 0.425);
+  color: rgb(242, 247, 203);
+}
+.add {
+  background-color: rgb(231, 120, 120);
+}
+.add:hover {
+  background-color: rgb(241, 92, 92);
+}
+
+.subtract {
+  background-color: rgb(221, 37, 37);
+}
+.subtract:hover {
+  background-color: rgb(228, 92, 92);
+}
+.type {
+  color: black;
+}
