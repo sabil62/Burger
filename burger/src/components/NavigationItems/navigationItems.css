@@ -1,0 +1,7 @@
+.navigationItems {
+  padding: 10px;
+  display: flex;
+  font-weight: 800;
+  color: wheat;
+  font-size: 1.33rem;
+}

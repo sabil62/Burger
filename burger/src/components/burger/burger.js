@@ -26,6 +26,7 @@ const burger = (props) => {
 
   return (
     <React.Fragment>
+      <div style={{ height: 68 }}></div>
       <div className="burger">
         <BurgerIngredients type="bread-top" />
         {burgerDisplay}

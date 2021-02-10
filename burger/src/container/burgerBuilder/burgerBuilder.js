@@ -6,6 +6,7 @@ import BurgerControls from "../../components/burger/burgerControls/burgerControl
 import Modal from "../../components/UI/modal/modal";
 //orderSummary
 import OrderSummary from "../../components/burger/burgerOrderSummary/OrderSummary";
+import Toolbar from "../../components/UI/toolbar/toolbar";
 
 const ingredientPrice = {
   salad: 1.2,
@@ -41,6 +42,7 @@ class BurgerBuilder extends Component {
     ) : null;
     return (
       <React.Fragment>
+        <Toolbar />
         <Burger ingredients={this.state.ingredients} />
         <BurgerControls
           ingredients={this.state.ingredients}
