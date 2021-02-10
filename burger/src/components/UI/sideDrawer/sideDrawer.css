@@ -1,0 +1,11 @@
+.sideDrawer {
+  position: fixed;
+  z-index: 300;
+  top: 0;
+  left: 0;
+  width: 267px;
+  background-color: #ce8c36;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.438);
+  border-left: 1px solid rgba(128, 128, 128, 0.596);
+  height: 100%;
+}

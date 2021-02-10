@@ -9,3 +9,9 @@
   align-items: center;
   justify-content: space-between;
 }
+.one-stick {
+  width: 35px;
+  height: 5px;
+  background-color: wheat;
+  margin: 6px 0;
+}

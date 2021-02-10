@@ -25,6 +25,7 @@ class BurgerBuilder extends Component {
     },
     showModal: false,
     totalPrice: 11, //not in {} like ingredients
+    showSideDrawer: false,
   };
 
   render() {
@@ -42,7 +43,11 @@ class BurgerBuilder extends Component {
     ) : null;
     return (
       <React.Fragment>
-        <Toolbar />
+        <Toolbar
+          showSideDrawer={this.state.showSideDrawer}
+          onSideBarTrue={() => this.handleSideDrawerTrue()}
+          onSideBarFalse={() => this.handleSideDrawerFalse()}
+        />
         <Burger ingredients={this.state.ingredients} />
         <BurgerControls
           ingredients={this.state.ingredients}
@@ -55,6 +60,12 @@ class BurgerBuilder extends Component {
       </React.Fragment>
     );
   }
+  handleSideDrawerTrue = () => {
+    this.setState({ showSideDrawer: true });
+  };
+  handleSideDrawerFalse = () => {
+    this.setState({ showSideDrawer: false });
+  };
   handleModalTrue = () => {
     this.setState({ showModal: true });
   };
