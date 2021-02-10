@@ -4,6 +4,15 @@ import Burger from "../../components/burger/burger";
 import BurgerControls from "../../components/burger/burgerControls/burgerControls";
 //modal
 import Modal from "../../components/UI/modal/modal";
+//orderSummary
+import OrderSummary from "../../components/burger/burgerOrderSummary/OrderSummary";
+
+const ingredientPrice = {
+  salad: 1.2,
+  bacon: 2,
+  meat: 2.4,
+  cheese: 1,
+};
 
 class BurgerBuilder extends Component {
   state = {
@@ -14,14 +23,21 @@ class BurgerBuilder extends Component {
       cheese: 1,
     },
     showModal: false,
+    totalPrice: 11, //not in {} like ingredients
   };
+
   render() {
     const disable = { ...this.state.ingredients };
     for (let name in disable) {
       disable[name] = disable[name] <= 0;
     }
     let modal = this.state.showModal ? (
-      <Modal onFalse={() => this.handleModalFalse()}>Lion tiger leopard</Modal>
+      <Modal onFalse={() => this.handleModalFalse()}>
+        <OrderSummary
+          ingredients={this.state.ingredients}
+          price={this.state.totalPrice}
+        />
+      </Modal>
     ) : null;
     return (
       <React.Fragment>
@@ -51,12 +67,20 @@ class BurgerBuilder extends Component {
   handleAdd = (name) => {
     const ingre = { ...this.state.ingredients };
     ingre[name]++;
-    this.setState({ ingredients: ingre });
+    // this.setState({ ingredients: ingre });
+    //for price
+    const oldPrice = this.state.totalPrice; //no {...this.} bcoz totalPrice is not in {}
+    const newPrice = oldPrice + ingredientPrice[name];
+    this.setState({ ingredients: ingre, totalPrice: newPrice });
   };
   handleSubtract = (name) => {
     const ingre = { ...this.state.ingredients };
     ingre[name]--;
-    this.setState({ ingredients: ingre });
+    // this.setState({ ingredients: ingre });
+    //for price
+    const oldPrice = this.state.totalPrice;
+    const newPrice = oldPrice - ingredientPrice[name];
+    this.setState({ ingredients: ingre, totalPrice: newPrice });
   };
 }
 
