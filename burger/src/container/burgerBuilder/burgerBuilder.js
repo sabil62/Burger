@@ -10,6 +10,8 @@ import Toolbar from "../../components/UI/toolbar/toolbar";
 
 //axios
 import axios from "../../axios-gen";
+//spinner
+import Spinner from "../../components/UI/spinner/spinner";
 
 const ingredientPrice = {
   salad: 1.2,
@@ -20,29 +22,45 @@ const ingredientPrice = {
 
 class BurgerBuilder extends Component {
   state = {
-    ingredients: {
-      salad: 3,
-      bacon: 1,
-      meat: 1,
-      cheese: 1,
-    },
+    ingredients: null,
     showModal: false,
     totalPrice: 11, //not in {} like ingredients
     showSideDrawer: false,
+    loadSpinner: false,
+    thingsLoaded: false,
   };
+  componentDidMount() {
+    axios
+      .get("/ingredients.json")
+      .then((response) => {
+        console.log(response.data);
+        this.setState({ ingredients: response.data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   render() {
     const disable = { ...this.state.ingredients };
     for (let name in disable) {
       disable[name] = disable[name] <= 0;
     }
+    let orderSummarys = this.state.loadSpinner ? (
+      <Spinner />
+    ) : (
+      <OrderSummary
+        ingredients={this.state.ingredients}
+        price={this.state.totalPrice}
+        onOrder={() => this.handleOrder()}
+        onCancel={() => this.handleModalFalse()}
+      />
+    );
+    if (this.state.thingsLoaded) {
+      orderSummarys = <h1>Thank you for your Order!</h1>;
+    }
     let modal = this.state.showModal ? (
-      <Modal onFalse={() => this.handleModalFalse()}>
-        <OrderSummary
-          ingredients={this.state.ingredients}
-          price={this.state.totalPrice}
-        />
-      </Modal>
+      <Modal onFalse={() => this.handleModalFalse()}>{orderSummarys}</Modal>
     ) : null;
     return (
       <React.Fragment>
@@ -63,6 +81,30 @@ class BurgerBuilder extends Component {
       </React.Fragment>
     );
   }
+  handleOrder = () => {
+    this.setState({ loadSpinner: true, thingsLoaded: false });
+    const post = {
+      ingredients: this.state.ingredients,
+      customer: {
+        name: "lion",
+        address: {
+          street: "calina",
+          country: "new",
+        },
+      },
+      deliveryMethod: "fastest",
+    };
+    axios
+      .post("/orders.json", post)
+      .then((response) => {
+        console.log(response.data);
+        this.setState({ loadSpinner: false, thingsLoaded: true });
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setState({ loadSpinner: false });
+      });
+  };
 
   handleSideDrawerTrue = () => {
     this.setState({ showSideDrawer: true });
@@ -75,6 +117,7 @@ class BurgerBuilder extends Component {
   };
   handleModalFalse = () => {
     this.setState({ showModal: false });
+    this.setState({ thingsLoaded: false });
   };
 
   // handleNegativeIngredients = (name) => {

@@ -26,8 +26,10 @@ const orderSummary = (props) => {
           justifyContent: "center",
         }}
       >
-        <Buttonn color={"green"}>Order</Buttonn>
-        <Buttonn>Cancel</Buttonn>
+        <Buttonn color={"green"} clickedd={props.onOrder}>
+          Order
+        </Buttonn>
+        <Buttonn clickedd={props.onCancel}>Cancel</Buttonn>
       </div>
     </div>
   );
