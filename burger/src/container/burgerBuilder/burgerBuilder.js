@@ -12,6 +12,7 @@ import Toolbar from "../../components/UI/toolbar/toolbar";
 import axios from "../../axios-gen";
 //spinner
 import Spinner from "../../components/UI/spinner/spinner";
+import spinner from "../../components/UI/spinner/spinner";
 
 const ingredientPrice = {
   salad: 1.2,
@@ -23,18 +24,32 @@ const ingredientPrice = {
 class BurgerBuilder extends Component {
   state = {
     ingredients: null,
+    totalPrice: null, //not in {} like ingredients //even though price is 11
     showModal: false,
-    totalPrice: 11, //not in {} like ingredients
+
     showSideDrawer: false,
     loadSpinner: false,
     thingsLoaded: false,
+    burgerLoaded: false,
   };
   componentDidMount() {
+    this.setState({ burgerLoaded: false });
     axios
       .get("/ingredients.json")
       .then((response) => {
         console.log(response.data);
-        this.setState({ ingredients: response.data });
+        this.setState({ ingredients: response.data, burgerLoaded: true });
+      })
+      .catch((err) => {
+        console.log(err);
+        this.setState({ burgerLoaded: true });
+      });
+    //for price
+    axios
+      .get("/totalPrice.json")
+      .then((response) => {
+        this.setState({ totalPrice: response.data });
+        console.log(response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -46,6 +61,11 @@ class BurgerBuilder extends Component {
     for (let name in disable) {
       disable[name] = disable[name] <= 0;
     }
+    let burger = this.state.burgerLoaded ? (
+      <Burger ingredients={this.state.ingredients} />
+    ) : (
+      <Spinner />
+    );
     let orderSummarys = this.state.loadSpinner ? (
       <Spinner />
     ) : (
@@ -69,7 +89,8 @@ class BurgerBuilder extends Component {
           onSideBarTrue={() => this.handleSideDrawerTrue()}
           onSideBarFalse={() => this.handleSideDrawerFalse()}
         />
-        <Burger ingredients={this.state.ingredients} />
+        {/* <Burger ingredients={this.state.ingredients} /> */}
+        {burger}
         <BurgerControls
           ingredients={this.state.ingredients}
           onAdd={this.handleAdd}
