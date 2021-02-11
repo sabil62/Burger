@@ -6,7 +6,6 @@ import BurgerControls from "../../components/burger/burgerControls/burgerControl
 import Modal from "../../components/UI/modal/modal";
 //orderSummary
 import OrderSummary from "../../components/burger/burgerOrderSummary/OrderSummary";
-import Toolbar from "../../components/UI/toolbar/toolbar";
 
 //axios
 import axios from "../../axios-gen";
@@ -26,7 +25,6 @@ class BurgerBuilder extends Component {
     totalPrice: 11, //not in {} like ingredients //total price also comes from firebase
     showModal: false,
 
-    showSideDrawer: false,
     loadSpinner: false,
     thingsLoaded: false,
     burgerLoaded: false,
@@ -89,11 +87,6 @@ class BurgerBuilder extends Component {
     // ) : null;
     return (
       <React.Fragment>
-        <Toolbar
-          showSideDrawer={this.state.showSideDrawer}
-          onSideBarTrue={() => this.handleSideDrawerTrue()}
-          onSideBarFalse={() => this.handleSideDrawerFalse()}
-        />
         {/* <Burger ingredients={this.state.ingredients} /> */}
         {burger}
         <BurgerControls
@@ -137,12 +130,6 @@ class BurgerBuilder extends Component {
       });
   };
 
-  handleSideDrawerTrue = () => {
-    this.setState({ showSideDrawer: true });
-  };
-  handleSideDrawerFalse = () => {
-    this.setState({ showSideDrawer: false });
-  };
   handleModalTrue = () => {
     this.setState({ showModal: true });
   };
