@@ -1,0 +1,15 @@
+.buttonn {
+  padding: 10px;
+  margin: 2px 14px;
+  font-weight: 700;
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.705);
+  font-size: 1.8rem;
+  transition: transform 0.2s ease;
+}
+.buttonn:hover {
+  transform: scale(1.12);
+}
+
+.buttonn:active {
+  transform: scale(1);
+}
