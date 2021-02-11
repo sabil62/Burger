@@ -12,7 +12,6 @@ import Toolbar from "../../components/UI/toolbar/toolbar";
 import axios from "../../axios-gen";
 //spinner
 import Spinner from "../../components/UI/spinner/spinner";
-import spinner from "../../components/UI/spinner/spinner";
 
 const ingredientPrice = {
   salad: 1.2,
@@ -24,7 +23,7 @@ const ingredientPrice = {
 class BurgerBuilder extends Component {
   state = {
     ingredients: null,
-    totalPrice: null, //not in {} like ingredients //even though price is 11
+    totalPrice: 11, //not in {} like ingredients //total price also comes from firebase
     showModal: false,
 
     showSideDrawer: false,
@@ -79,9 +78,15 @@ class BurgerBuilder extends Component {
     if (this.state.thingsLoaded) {
       orderSummarys = <h1>Thank you for your Order!</h1>;
     }
-    let modal = this.state.showModal ? (
-      <Modal onFalse={() => this.handleModalFalse()}>{orderSummarys}</Modal>
-    ) : null;
+    //for animation this should be avoided
+    // let modal = this.state.showModal ? (
+    //   <Modal
+    //     onFalse={() => this.handleModalFalse()}
+    //     showModal={this.state.showModal}
+    //   >
+    //     {orderSummarys}
+    //   </Modal>
+    // ) : null;
     return (
       <React.Fragment>
         <Toolbar
@@ -98,7 +103,12 @@ class BurgerBuilder extends Component {
           disables={disable}
           onModalTrue={() => this.handleModalTrue()}
         />
-        {modal}
+        <Modal
+          onFalse={() => this.handleModalFalse()}
+          showModal={this.state.showModal}
+        >
+          {orderSummarys}
+        </Modal>
       </React.Fragment>
     );
   }

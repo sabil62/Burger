@@ -1,16 +1,21 @@
 .upper-modal {
   position: fixed;
-  top: 50%;
-  left: 50%;
-
-  width: 100%;
-  margin: auto;
+  top: 20%;
+  left: 35%;
   z-index: 300;
+
+  transition: transform 0.3s ease-out;
 }
+.closer {
+  transform: translateY(-100vh);
+}
+.openr {
+  transform: translateY(0px);
+}
+
 .modal {
   padding: 1.6rem;
   border: 2px solid rgba(233, 221, 221, 0.363);
   background-color: rgba(16, 129, 123, 0.466);
   width: 400px;
-  transform: translate(-50%, -50%);
 }
