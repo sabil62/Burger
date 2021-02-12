@@ -7,7 +7,7 @@ const orderSummary = (props) => {
     ingres.push({ ingresName: name, amount: props.ingredients[name] });
   }
   let display = ingres.map((orders) => (
-    <div>
+    <div key={orders.ingresName}>
       <span>{orders.ingresName}</span>
       :-
       <span>{orders.amount}</span>
@@ -30,6 +30,9 @@ const orderSummary = (props) => {
           Order
         </Buttonn>
         <Buttonn clickedd={props.onCancel}>Cancel</Buttonn>
+        <Buttonn clickedd={props.onCheckout}>
+          <span style={{ color: "yellow" }}>Checkout</span>
+        </Buttonn>
       </div>
     </div>
   );

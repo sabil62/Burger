@@ -26,9 +26,7 @@ class Orders extends Component {
     let display = <Spinner />;
     if (this.state.load) {
       display = this.state.dataFromFire.map((order) => (
-        <Order key={order.key} ingredients={order.ingredients}>
-          H
-        </Order>
+        <Order key={order.key} ingredients={order.ingredients} />
       ));
     }
     return (

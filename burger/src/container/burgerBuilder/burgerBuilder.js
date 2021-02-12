@@ -30,6 +30,7 @@ class BurgerBuilder extends Component {
     burgerLoaded: false,
   };
   componentDidMount() {
+    console.log(this.props);
     this.setState({ burgerLoaded: false });
     axios
       .get("/ingredients.json")
@@ -71,6 +72,7 @@ class BurgerBuilder extends Component {
         price={this.state.totalPrice}
         onOrder={() => this.handleOrder()}
         onCancel={() => this.handleModalFalse()}
+        onCheckout={() => this.handleCheckout()}
       />
     );
     if (this.state.thingsLoaded) {
@@ -105,6 +107,23 @@ class BurgerBuilder extends Component {
       </React.Fragment>
     );
   }
+  handleCheckout = () => {
+    let send = [];
+    for (let name in this.state.ingredients) {
+      send.push(
+        encodeURIComponent(name) +
+          "=" +
+          encodeURIComponent(this.state.ingredients[name])
+      );
+    }
+    send.push("price=" + this.state.totalPrice);
+    const queryParams = send.join("&");
+    this.props.history.push({
+      pathname: "/checkout",
+      search: "?" + queryParams,
+    });
+  };
+
   handleOrder = () => {
     this.setState({ loadSpinner: true, thingsLoaded: false });
     const post = {
