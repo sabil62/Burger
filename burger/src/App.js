@@ -5,8 +5,8 @@ import Layouts from "./container/layout/layout";
 import Orders from "./container/order/orders";
 import Checkout from "./container/checkout/checkout";
 // import ContactForm from "./container/checkoutForm/checkoutForm";
-import ContactForms from "./container/checkoutForm/checkoutFormAnother/contactForm";
-import ContactFormss from "./container/checkout/checkoutForms/contactForms";
+// import ContactForms from "./container/checkoutForm/checkoutFormAnother/contactForm";
+// import ContactFormss from "./container/checkout/checkoutForms/contactForms";
 
 function App() {
   return (

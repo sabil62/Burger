@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import Burger from "../../components/burger/burger";
 //buttons
 import Buttonn from "../../components/UI/buttons/button";
-import ContactForm from "../checkoutForm/checkoutForm";
+// import ContactForm from "../checkoutForm/checkoutForm";
 import CheckoutSummary from "../../components/checkoutSummary/checkoutSummary";
-import ContactForms from "../checkoutForm/checkoutFormAnother/contactForm";
+// import ContactForms from "../checkoutForm/checkoutFormAnother/contactForm";
 import ContactFormss from "./checkoutForms/contactForms";
 //Route
 import { Route } from "react-router-dom";
+//axios
+import axios from "../../axios-gen";
 
 class Checkout extends Component {
   state = {
@@ -36,6 +38,7 @@ class Checkout extends Component {
           Contact Form
         </Buttonn>
         <Buttonn clickedd={() => this.handleCancel()}>Cancel</Buttonn>
+        <button onClick={() => this.handleSubmission()}>Pinch to submit</button>
 
         {/* Either this or above (Both works) */}
 
@@ -65,7 +68,7 @@ class Checkout extends Component {
         <Route
           path={this.props.match.path + "/contact-form"}
           // component={ContactForm}
-          render={() => <ContactForm ingredients={this.state.ingredients} />}
+          render={() => <ContactFormss ingredients={this.state.ingredients} />}
         />
       </React.Fragment>
     );
@@ -77,6 +80,13 @@ class Checkout extends Component {
   handleCancel = () => {
     this.props.history.goBack();
     //you can use redirect also google search for it like react redirect
+  };
+  handleSubmission = () => {
+    const poster = { lion: "tiger" };
+
+    axios.post("/orders23.json", poster).then((response) => {
+      console.log(response.data);
+    });
   };
 }
 
