@@ -4,4 +4,15 @@
   font-weight: 800;
   color: wheat;
   font-size: 1.33rem;
+  text-decoration: none;
+}
+
+.activeClassName {
+  background-color: rgb(218, 204, 179);
+  border-bottom: 4px solid rgb(84, 154, 219);
+  /* this color property willnot impact as classname already has one */
+  color: rgb(68, 65, 65);
+}
+.passiveClassName {
+  text-decoration: none;
 }

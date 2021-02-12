@@ -1,15 +1,31 @@
 import React from "react";
 import NavigationItem from "./navigationItem/navigationItem";
 import "./navigationItems.css";
+import { NavLink } from "react-router-dom";
 
 const navigationItems = (props) => {
   return (
     <div
       className="navigationItems"
-      style={{ flexDirection: props.direction == "column" ? "column" : "row" }}
+      style={{
+        flexDirection: props.direction == "column" ? "column" : "row",
+        textDecoration: "none",
+      }}
     >
-      <NavigationItem>Home</NavigationItem>
-      <NavigationItem>Orders</NavigationItem>
+      <NavLink
+        to="/"
+        activeClassName="activeClassName"
+        className="passiveClassName"
+      >
+        <NavigationItem link="/">Home</NavigationItem>
+      </NavLink>
+      <NavLink
+        to="/order"
+        activeClassName="activeClassName"
+        className="passiveClassName"
+      >
+        <NavigationItem link="/order">Orders</NavigationItem>
+      </NavLink>
     </div>
   );
 };

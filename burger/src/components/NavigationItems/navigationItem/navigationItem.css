@@ -1,8 +1,16 @@
 .navigationItem {
   padding: 10px 18px;
+  text-decoration: none;
 }
+
 .navigationItem:hover {
   background-color: rgb(218, 204, 179);
   border-bottom: 4px solid rgb(84, 154, 219);
   color: rgb(80, 79, 79);
 }
+/* .activeClassName {
+  background-color: rgb(218, 204, 179);
+  border-bottom: 4px solid rgb(84, 154, 219);
+  color: rgb(80, 79, 79);
+  padding: 10px 18px;
+} */
