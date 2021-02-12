@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import Input from "../../components/UI/input/input";
+import Input from "../../../components/UI/input/input";
 import "./contactForm.css";
 //axios
-import axios from "../../axios-gen";
 
-class ContactForm extends Component {
+class ContactFormss extends Component {
   state = {
     loaded: false,
     orderForm: {
@@ -108,4 +107,4 @@ class ContactForm extends Component {
   };
 }
 
-export default ContactForm;
+export default ContactFormss;

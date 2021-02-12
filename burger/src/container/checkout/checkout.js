@@ -2,8 +2,12 @@ import React, { Component } from "react";
 import Burger from "../../components/burger/burger";
 //buttons
 import Buttonn from "../../components/UI/buttons/button";
-
+import ContactForm from "../checkoutForm/checkoutForm";
 import CheckoutSummary from "../../components/checkoutSummary/checkoutSummary";
+import ContactForms from "../checkoutForm/checkoutFormAnother/contactForm";
+import ContactFormss from "./checkoutForms/contactForms";
+//Route
+import { Route } from "react-router-dom";
 
 class Checkout extends Component {
   state = {
@@ -49,6 +53,20 @@ class Checkout extends Component {
           component={withRouter(ContactForm)}
           // render={() => <ContactForm names={"lions"} />}
         /> */}
+        {/* <Route
+          path={this.props.match.path + "/contact-form"}
+          render={() => (
+            <ContactFormss
+              ingredients={this.state.ingredients}
+              tiger={"tiger"}
+            />
+          )}
+        /> */}
+        <Route
+          path={this.props.match.path + "/contact-form"}
+          // component={ContactForm}
+          render={() => <ContactForm ingredients={this.state.ingredients} />}
+        />
       </React.Fragment>
     );
   }
