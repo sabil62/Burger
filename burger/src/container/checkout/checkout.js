@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import Burger from "../../components/burger/burger";
 //buttons
 import Buttonn from "../../components/UI/buttons/button";
-import ContactForm from "../checkoutForm/moreinside/checkoutForm";
-//route
-import { Route, Switch } from "react-router-dom";
-import Spinner from "../../components/UI/spinner/spinner";
+
+import CheckoutSummary from "../../components/checkoutSummary/checkoutSummary";
 
 class Checkout extends Component {
   state = {
@@ -25,41 +23,32 @@ class Checkout extends Component {
       }
     }
     this.setState({ price: prices, ingredients: ingre });
-
-    // const query = new URLSearchParams(this.props.location.search);
-    // const ingres = {};
-    // let prices = 0;
-    // for (let param of query.entries()) {
-    //   if (param[0] === "price") {
-    //     prices = param[1];
-    //   } else {
-    //     ingres[param[0]] = +param[1];
-    //   }
-    // }
-    // this.setState({ ingredients: ingres, price: prices });
   }
   render() {
     return (
       <React.Fragment>
-        <div>
-          <br />
-          <br />
-          <br />
+        <Burger ingredients={this.state.ingredients} />
+        <Buttonn color={"green"} clickedd={() => this.handleContactForm()}>
+          Contact Form
+        </Buttonn>
+        <Buttonn clickedd={() => this.handleCancel()}>Cancel</Buttonn>
 
-          <Burger ingredients={this.state.ingredients} />
-          <Buttonn color={"green"} clickedd={() => this.handleContactForm()}>
-            Contact Form
-          </Buttonn>
-          <Buttonn clickedd={() => this.handleCancel()}>Cancel</Buttonn>
+        {/* Either this or above (Both works) */}
 
-          <Route
-            path={this.props.match.path + "/contact-form"}
-            //or
-            // path={"/checkout/contact-form"}
-            exact
-            render={() => <ContactForm names={"lions"} />}
-          />
-        </div>
+        {/* <CheckoutSummary
+          ingredients={this.state.ingredients}
+          handleContactForm={() => this.handleContactForm()}
+          handleCancel={() => this.handleCancel()}
+        /> */}
+        {/* ---------------------------------- This <Route/> didnt work-------------------------------- */}
+        {/* 
+        <Route
+          path={this.props.match.path + "/contact-form"}
+          //or
+          // path={"/checkout/contact-form"}
+          component={withRouter(ContactForm)}
+          // render={() => <ContactForm names={"lions"} />}
+        /> */}
       </React.Fragment>
     );
   }
@@ -74,21 +63,3 @@ class Checkout extends Component {
 }
 
 export default Checkout;
-
-//  {/* <Route to="/checkout/contact-form" component={ContactForm} /> */}
-//  <Route
-//  path={this.props.match.path + "/contact-data"}
-//  // component={ContactForm}
-//  render={() => (
-//    <ContactForm
-//      ingredients={this.state.ingredients}
-//      price={this.state.price}
-//    />
-//  )}
-// />
-// </div>
-// );
-// }
-// handleOrderCheckout = () => {
-// this.props.history.replace("/checkout/contact-data");
-// };
