@@ -9,13 +9,13 @@ const navigationItems = (props) => {
       className="navigationItems"
       style={{
         flexDirection: props.direction == "column" ? "column" : "row",
-        textDecoration: "none",
       }}
     >
       <NavLink
         to="/"
         activeClassName="activeClassName"
         className="passiveClassName"
+        activeStyle={{ color: "black" }}
       >
         <NavigationItem link="/">Home</NavigationItem>
       </NavLink>
@@ -23,6 +23,7 @@ const navigationItems = (props) => {
         to="/order"
         activeClassName="activeClassName"
         className="passiveClassName"
+        activeStyle={{ color: "black" }}
       >
         <NavigationItem link="/order">Orders</NavigationItem>
       </NavLink>
