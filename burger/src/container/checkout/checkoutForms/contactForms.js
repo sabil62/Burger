@@ -74,34 +74,29 @@ class ContactFormss extends Component {
       />
     ));
     let form = (
-      <div>
+      <form onSubmit={this.handleSubmit}>
         <h1>Contact form page</h1>
         <div className="ContactForm">
           <div className="ContactFormInner">{displayInput}</div>
-          <button
-            style={{ padding: 12 }}
-            onClick={() => this.handleSubmissions()}
-          >
-            Submit Form
-          </button>
+          <button style={{ padding: 12 }}>Submit Form</button>
         </div>
-      </div>
+      </form>
     );
     if (this.state.loader) {
       form = <Spinner />;
     }
     return form;
   }
-  handleSubmissions = () => {
-    const poster = { lion: "tiger" };
+  // handleSubmissions = () => {
+  //   const poster = { lion: "tiger" };
 
-    axios.post("/orders24.json", poster).then((response) => {
-      console.log(response.data);
-    });
-  };
+  //   axios.post("/orders24.json", poster).then((response) => {
+  //     console.log(response.data);
+  //   });
+  // };
 
-  handleSubmit = () => {
-    // event.preventDefault();
+  handleSubmit = (event) => {
+    event.preventDefault();
     this.setState({ loader: true });
     const formValue = {};
     for (let names in this.state.orderForm) {

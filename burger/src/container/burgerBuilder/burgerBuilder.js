@@ -11,6 +11,9 @@ import OrderSummary from "../../components/burger/burgerOrderSummary/OrderSummar
 import axios from "../../axios-gen";
 //spinner
 import Spinner from "../../components/UI/spinner/spinner";
+//redux
+import { connect } from "react-redux";
+import * as actionCreation from "../../store/actionCreation/burgerAction";
 
 const ingredientPrice = {
   salad: 1.2,
@@ -30,28 +33,30 @@ class BurgerBuilder extends Component {
     burgerLoaded: false,
   };
   componentDidMount() {
-    console.log(this.props);
-    this.setState({ burgerLoaded: false });
-    axios
-      .get("/ingredients.json")
-      .then((response) => {
-        console.log(response.data);
-        this.setState({ ingredients: response.data, burgerLoaded: true });
-      })
-      .catch((err) => {
-        console.log(err);
-        this.setState({ burgerLoaded: true });
-      });
-    //for price
-    axios
-      .get("/totalPrice.json")
-      .then((response) => {
-        this.setState({ totalPrice: response.data });
-        console.log(response.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    // console.log(this.props);
+    // // this.setState({ burgerLoaded: false });
+    this.props.initialFetchingFireBase();
+    // // axios
+    // //   .get("/ingredients.json")
+    // //   .then((response) => {
+    // //     console.log(response.data);
+    // //     this.setState({ ingredients: response.data, burgerLoaded: true });
+    // //   })
+    // //   .catch((err) => {
+    // //     console.log(err);
+    // //     this.setState({ burgerLoaded: true });
+    // //   });
+    // //for price
+    // // axios
+    // //   .get("/totalPrice.json")
+    // //   .then((response) => {
+    // //     this.setState({ totalPrice: response.data });
+    // //     console.log(response.data);
+    // //   })
+    // //   .catch((err) => {
+    // //     console.log(err);
+    // //   });
+    // .
   }
 
   render() {
@@ -59,17 +64,18 @@ class BurgerBuilder extends Component {
     for (let name in disable) {
       disable[name] = disable[name] <= 0;
     }
-    let burger = this.state.burgerLoaded ? (
-      <Burger ingredients={this.state.ingredients} />
+    let burger = this.props.ingreR ? (
+      <Burger ingredients={this.props.ingreR} />
     ) : (
       <Spinner />
     );
+    // let burger = <Burger ingredients={this.props.ingreR} />;
     let orderSummarys = this.state.loadSpinner ? (
       <Spinner />
     ) : (
       <OrderSummary
-        ingredients={this.state.ingredients}
-        price={this.state.totalPrice}
+        ingredients={this.props.ingreR}
+        price={this.props.priceR}
         onOrder={() => this.handleOrder()}
         onCancel={() => this.handleModalFalse()}
         onCheckout={() => this.handleCheckout()}
@@ -78,25 +84,27 @@ class BurgerBuilder extends Component {
     if (this.state.thingsLoaded) {
       orderSummarys = <h1>Thank you for your Order!</h1>;
     }
-    //for animation this should be avoided
-    // let modal = this.state.showModal ? (
-    //   <Modal
-    //     onFalse={() => this.handleModalFalse()}
-    //     showModal={this.state.showModal}
-    //   >
-    //     {orderSummarys}
-    //   </Modal>
-    // ) : null;
+    // .
+    // //for animation this should be avoided
+    // // let modal = this.state.showModal ? (
+    // //   <Modal
+    // //     onFalse={() => this.handleModalFalse()}
+    // //     showModal={this.state.showModal}
+    // //   >
+    // //     {orderSummarys}
+    // //   </Modal>
+    // // ) : null;
     return (
       <React.Fragment>
         {/* <Burger ingredients={this.state.ingredients} /> */}
         {burger}
         <BurgerControls
-          ingredients={this.state.ingredients}
-          onAdd={this.handleAdd}
-          onSubtract={this.handleSubtract}
+          ingredients={this.props.ingreR}
+          onAdd={this.props.onAddIngredient}
+          onSubtract={this.props.onRemoveIngredient}
           disables={disable}
           onModalTrue={() => this.handleModalTrue()}
+          price={this.props.priceR}
         />
         <Modal
           onFalse={() => this.handleModalFalse()}
@@ -181,4 +189,21 @@ class BurgerBuilder extends Component {
   };
 }
 
-export default BurgerBuilder;
+const mapStateToProps = (state) => {
+  return {
+    ingreR: state.ingredients,
+    priceR: state.totalPrice,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    initialFetchingFireBase: () => dispatch(actionCreation.fetch_ingredients()),
+    onAddIngredient: (ingreNam) =>
+      dispatch(actionCreation.add_ingredients(ingreNam)),
+    onRemoveIngredient: (ingreNam) =>
+      dispatch(actionCreation.remove_ingredients(ingreNam)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(BurgerBuilder);

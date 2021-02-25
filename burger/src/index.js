@@ -6,11 +6,22 @@ import reportWebVitals from "./reportWebVitals";
 //VVI step
 import { BrowserRouter } from "react-router-dom";
 
+import burger_reducer from "./store/reducer/burger_reducer";
+
+import { Provider } from "react-redux";
+
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+
+const store = createStore(burger_reducer, applyMiddleware(thunk));
+
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

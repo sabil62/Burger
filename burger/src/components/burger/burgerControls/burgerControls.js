@@ -20,6 +20,10 @@ const burgerControls = (props) => {
   ));
   return (
     <div className="burgerControlss">
+      <br />
+      <span>
+        Total price: <strong>{props.price}</strong>
+      </span>
       {ingreds}
       <button
         className="order-now"

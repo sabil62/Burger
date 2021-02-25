@@ -1,9 +1,8 @@
 .burger {
-  height: 350px;
-  width: 350px;
+  height: 270px;
+  width: 250px;
   overflow: scroll;
   text-align: center;
-
   margin: auto;
 }
 .burgerSide {

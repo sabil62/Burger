@@ -13,6 +13,7 @@
   border: 1px solid rgba(31, 30, 30, 0.425);
   color: rgb(242, 247, 203);
   outline: none;
+  cursor: pointer;
 }
 .add {
   background-color: rgb(231, 174, 120);
