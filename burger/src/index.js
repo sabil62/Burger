@@ -7,13 +7,19 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 
 import burger_reducer from "./store/reducer/burger_reducer";
+import order_reducer from "./store/reducer/order_reducer";
 
 import { Provider } from "react-redux";
 
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 
-const store = createStore(burger_reducer, applyMiddleware(thunk));
+const rootreducer = combineReducers({
+  burger: burger_reducer,
+  order: order_reducer,
+});
+
+const store = createStore(rootreducer, applyMiddleware(thunk));
 
 ReactDOM.render(
   <React.StrictMode>

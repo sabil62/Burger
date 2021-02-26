@@ -15,17 +15,17 @@ import Spinner from "../../components/UI/spinner/spinner";
 import { connect } from "react-redux";
 import * as actionCreation from "../../store/actionCreation/burgerAction";
 
-const ingredientPrice = {
-  salad: 1.2,
-  bacon: 2,
-  meat: 2.4,
-  cheese: 1,
-};
+// const ingredientPrice = {
+//   salad: 1.2,
+//   bacon: 2,
+//   meat: 2.4,
+//   cheese: 1,
+// };
 
 class BurgerBuilder extends Component {
   state = {
-    ingredients: null,
-    totalPrice: 11, //not in {} like ingredients //total price also comes from firebase
+    // ingredients: null,
+    // totalPrice: 11, //not in {} like ingredients //total price also comes from firebase
     showModal: false,
 
     loadSpinner: false,
@@ -165,34 +165,35 @@ class BurgerBuilder extends Component {
     this.setState({ thingsLoaded: false });
   };
 
-  // handleNegativeIngredients = (name) => {
-  //   const disable = { ...this.state.ingredients };
-  //   return disable[name] <= 1;
-  // };
-  handleAdd = (name) => {
-    const ingre = { ...this.state.ingredients };
-    ingre[name]++;
-    // this.setState({ ingredients: ingre });
-    //for price
-    const oldPrice = this.state.totalPrice; //no {...this.} bcoz totalPrice is not in {}
-    const newPrice = oldPrice + ingredientPrice[name];
-    this.setState({ ingredients: ingre, totalPrice: newPrice });
-  };
-  handleSubtract = (name) => {
-    const ingre = { ...this.state.ingredients };
-    ingre[name]--;
-    // this.setState({ ingredients: ingre });
-    //for price
-    const oldPrice = this.state.totalPrice;
-    const newPrice = oldPrice - ingredientPrice[name];
-    this.setState({ ingredients: ingre, totalPrice: newPrice });
-  };
+  //   // handleNegativeIngredients = (name) => {
+  //   //   const disable = { ...this.state.ingredients };
+  //   //   return disable[name] <= 1;
+  //   // };
+  //   .
+  // //   handleAdd = (name) => {
+  // //     const ingre = { ...this.state.ingredients };
+  // //     ingre[name]++;
+  // //     // this.setState({ ingredients: ingre });
+  // //     //for price
+  // //     const oldPrice = this.state.totalPrice; //no {...this.} bcoz totalPrice is not in {}
+  // //     const newPrice = oldPrice + ingredientPrice[name];
+  // //     this.setState({ ingredients: ingre, totalPrice: newPrice });
+  // //   };
+  // //   handleSubtract = (name) => {
+  // //     const ingre = { ...this.state.ingredients };
+  // //     ingre[name]--;
+  // //     // this.setState({ ingredients: ingre });
+  // //     //for price
+  // //     const oldPrice = this.state.totalPrice;
+  // //     const newPrice = oldPrice - ingredientPrice[name];
+  // //     this.setState({ ingredients: ingre, totalPrice: newPrice });
+  // //   };
 }
 
 const mapStateToProps = (state) => {
   return {
-    ingreR: state.ingredients,
-    priceR: state.totalPrice,
+    ingreR: state.burger.ingredients,
+    priceR: state.burger.totalPrice,
   };
 };
 
