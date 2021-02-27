@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import burger_reducer from "./store/reducer/burger_reducer";
 import order_reducer from "./store/reducer/order_reducer";
+import auth_reducer from "./store/reducer/auth_reducer";
 
 import { Provider } from "react-redux";
 
@@ -17,6 +18,7 @@ import thunk from "redux-thunk";
 const rootreducer = combineReducers({
   burger: burger_reducer,
   order: order_reducer,
+  auth: auth_reducer,
 });
 
 const store = createStore(rootreducer, applyMiddleware(thunk));

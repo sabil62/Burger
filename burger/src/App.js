@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 import Layouts from "./container/layout/layout";
 import Orders from "./container/order/orders";
 import Checkout from "./container/checkout/checkout";
+import Auth from "./container/auth/auth";
 // import ContactForm from "./container/checkoutForm/checkoutForm";
 // import ContactForms from "./container/checkoutForm/checkoutFormAnother/contactForm";
 // import ContactFormss from "./container/checkout/checkoutForms/contactForms";
@@ -19,6 +20,7 @@ function App() {
       {/* we can do both above techniques <Route pahtcomponent={Layouts}/> */}
       <Route path="/order" component={Orders} />
       <Route path="/checkout" component={Checkout} />
+      <Route path="/auth" component={Auth} />
       {/* <Route path="/checkout/contact-form" component={ContactFormss} /> */}
     </div>
   );
