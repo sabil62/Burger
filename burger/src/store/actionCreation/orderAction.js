@@ -11,3 +11,23 @@ export const fetch_order = () => {
     });
   };
 };
+
+export const post_order = (ingre) => {
+  return (dispatch) => {
+    dispatch({ type: "LOAD_SPINNER_THINGS_LOADED" });
+    const post = {
+      ingredients: ingre,
+      customer: {
+        name: "lion",
+        address: {
+          street: "calina",
+          country: "new",
+        },
+      },
+      deliveryMethod: "fastest",
+    };
+    axios.post("/orders.json", post).then((resp) => {
+      dispatch({ type: "POST_ORDER" });
+    });
+  };
+};

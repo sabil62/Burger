@@ -14,6 +14,7 @@ import Spinner from "../../components/UI/spinner/spinner";
 //redux
 import { connect } from "react-redux";
 import * as actionCreation from "../../store/actionCreation/burgerAction";
+import * as actionCreations from "../../store/actionCreation/orderAction";
 
 // const ingredientPrice = {
 //   salad: 1.2,
@@ -70,18 +71,18 @@ class BurgerBuilder extends Component {
       <Spinner />
     );
     // let burger = <Burger ingredients={this.props.ingreR} />;
-    let orderSummarys = this.state.loadSpinner ? (
+    let orderSummarys = this.props.loadSpinner ? (
       <Spinner />
     ) : (
       <OrderSummary
         ingredients={this.props.ingreR}
         price={this.props.priceR}
-        onOrder={() => this.handleOrder()}
+        onOrder={() => this.props.onPostOrder(this.props.ingreR)}
         onCancel={() => this.handleModalFalse()}
         onCheckout={() => this.handleCheckout()}
       />
     );
-    if (this.state.thingsLoaded) {
+    if (this.props.thingsLoaded) {
       orderSummarys = <h1>Thank you for your Order!</h1>;
     }
     // .
@@ -116,46 +117,47 @@ class BurgerBuilder extends Component {
     );
   }
   handleCheckout = () => {
-    let send = [];
-    for (let name in this.state.ingredients) {
-      send.push(
-        encodeURIComponent(name) +
-          "=" +
-          encodeURIComponent(this.state.ingredients[name])
-      );
-    }
-    send.push("price=" + this.state.totalPrice);
-    const queryParams = send.join("&");
-    this.props.history.push({
-      pathname: "/checkout",
-      search: "?" + queryParams,
-    });
+    // let send = [];
+    // for (let name in this.state.ingredients) {
+    //   send.push(
+    //     encodeURIComponent(name) +
+    //       "=" +
+    //       encodeURIComponent(this.state.ingredients[name])
+    //   );
+    // }
+    // send.push("price=" + this.state.totalPrice);
+    // const queryParams = send.join("&");
+    // this.props.history.push({
+    //   pathname: "/checkout",
+    //   search: "?" + queryParams,
+    // });
+    this.props.history.push("/checkout");
   };
 
-  handleOrder = () => {
-    this.setState({ loadSpinner: true, thingsLoaded: false });
-    const post = {
-      ingredients: this.state.ingredients,
-      customer: {
-        name: "lion",
-        address: {
-          street: "calina",
-          country: "new",
-        },
-      },
-      deliveryMethod: "fastest",
-    };
-    axios
-      .post("/orders.json", post)
-      .then((response) => {
-        console.log(response.data);
-        this.setState({ loadSpinner: false, thingsLoaded: true });
-      })
-      .catch((err) => {
-        console.log(err);
-        this.setState({ loadSpinner: false });
-      });
-  };
+  // handleOrder = () => {
+  //   this.setState({ loadSpinner: true, thingsLoaded: false });
+  //   const post = {
+  //     ingredients: this.state.ingredients,
+  //     customer: {
+  //       name: "lion",
+  //       address: {
+  //         street: "calina",
+  //         country: "new",
+  //       },
+  //     },
+  //     deliveryMethod: "fastest",
+  //   };
+  //   axios
+  //     .post("/orders.json", post)
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       this.setState({ loadSpinner: false, thingsLoaded: true });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       this.setState({ loadSpinner: false });
+  //     });
+  // };
 
   handleModalTrue = () => {
     this.setState({ showModal: true });
@@ -194,6 +196,8 @@ const mapStateToProps = (state) => {
   return {
     ingreR: state.burger.ingredients,
     priceR: state.burger.totalPrice,
+    loadSpinner: state.order.loadSpinner,
+    thingsLoaded: state.order.thingsLoaded,
   };
 };
 
@@ -204,6 +208,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actionCreation.add_ingredients(ingreNam)),
     onRemoveIngredient: (ingreNam) =>
       dispatch(actionCreation.remove_ingredients(ingreNam)),
+    onPostOrder: (ingre) => dispatch(actionCreations.post_order(ingre)),
   };
 };
 

@@ -10,30 +10,32 @@ import ContactFormss from "./checkoutForms/contactForms";
 import { Route } from "react-router-dom";
 //axios
 import axios from "../../axios-gen";
+//redux
+import { connect } from "react-redux";
 
 class Checkout extends Component {
-  state = {
-    ingredients: null,
-    price: null,
-  };
-  componentWillMount() {
-    console.log(this.props);
-    const query = new URLSearchParams(this.props.location.search);
-    let prices = 0;
-    let ingre = {};
-    for (let params of query.entries()) {
-      if (params[0] == "price") {
-        prices = params[1];
-      } else {
-        ingre[params[0]] = +params[1]; //as this is string so need to convert to number
-      }
-    }
-    this.setState({ price: prices, ingredients: ingre });
-  }
+  // state = {
+  //   ingredients: null,
+  //   price: null,
+  // };
+  // componentWillMount() {
+  //   // console.log(this.props);
+  //   // const query = new URLSearchParams(this.props.location.search);
+  //   // let prices = 0;
+  //   // let ingre = {};
+  //   // for (let params of query.entries()) {
+  //   //   if (params[0] == "price") {
+  //   //     prices = params[1];
+  //   //   } else {
+  //   //     ingre[params[0]] = +params[1]; //as this is string so need to convert to number
+  //   //   }
+  //   // }
+  //   // this.setState({ price: prices, ingredients: ingre });
+  // }
   render() {
     return (
       <React.Fragment>
-        <Burger ingredients={this.state.ingredients} />
+        <Burger ingredients={this.props.ingredientsR} />
         <Buttonn color={"green"} clickedd={() => this.handleContactForm()}>
           Contact Form
         </Buttonn>
@@ -68,7 +70,7 @@ class Checkout extends Component {
         <Route
           path={this.props.match.path + "/contact-form"}
           // component={ContactForm}
-          render={() => <ContactFormss ingredients={this.state.ingredients} />}
+          render={() => <ContactFormss ingredients={this.props.priceR} />}
         />
       </React.Fragment>
     );
@@ -90,4 +92,11 @@ class Checkout extends Component {
   };
 }
 
-export default Checkout;
+const mapStateToProps = (state) => {
+  return {
+    ingredientsR: state.burger.ingredients,
+    priceR: state.burger.totalPrice,
+  };
+};
+
+export default connect(mapStateToProps)(Checkout);
