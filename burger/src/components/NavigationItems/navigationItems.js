@@ -27,6 +27,26 @@ const navigationItems = (props) => {
       >
         <NavigationItem link="/order">Orders</NavigationItem>
       </NavLink>
+
+      {props.isLoggedIn ? (
+        <NavLink
+          to="/logout"
+          activeClassName="activeClassName"
+          className="passiveClassName"
+          activeStyle={{ color: "black" }}
+        >
+          <NavigationItem link="/logout">LogOut</NavigationItem>
+        </NavLink>
+      ) : (
+        <NavLink
+          to="/auth"
+          activeClassName="activeClassName"
+          className="passiveClassName"
+          activeStyle={{ color: "black" }}
+        >
+          <NavigationItem link="/auth">Login</NavigationItem>
+        </NavLink>
+      )}
     </div>
   );
 };

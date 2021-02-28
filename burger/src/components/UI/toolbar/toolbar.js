@@ -19,7 +19,7 @@ const toolbar = (props) => {
           <Logo />
         </div>
 
-        <NavigationItems />
+        <NavigationItems isLoggedIn={props.isLoggedIn} />
       </div>
       <SideDrawer
         showSideDrawer={props.showSideDrawer}

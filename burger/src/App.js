@@ -5,6 +5,7 @@ import Layouts from "./container/layout/layout";
 import Orders from "./container/order/orders";
 import Checkout from "./container/checkout/checkout";
 import Auth from "./container/auth/auth";
+import Logout from "./container/logout/logout";
 // import ContactForm from "./container/checkoutForm/checkoutForm";
 // import ContactForms from "./container/checkoutForm/checkoutFormAnother/contactForm";
 // import ContactFormss from "./container/checkout/checkoutForms/contactForms";
@@ -21,6 +22,7 @@ function App() {
       <Route path="/order" component={Orders} />
       <Route path="/checkout" component={Checkout} />
       <Route path="/auth" component={Auth} />
+      <Route path="/logout" component={Logout} />
       {/* <Route path="/checkout/contact-form" component={ContactFormss} /> */}
     </div>
   );

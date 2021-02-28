@@ -94,8 +94,8 @@ class Auth extends Component {
     event.preventDefault();
     this.props.onAuth(
       this.state.controls.email.value,
-      this.state.controls.password.value
-      //   this.state.isSingedIn
+      this.state.controls.password.value,
+      this.state.isSingedIn
     );
   };
 
@@ -144,12 +144,23 @@ class Auth extends Component {
         <br />
         <br />
         <br />
+        {this.state.isSingedIn
+          ? "You have account So Sing IN"
+          : "Please make account"}
+        <br />
+        <button onClick={() => this.handleSignClick()}>
+          Switch to {this.state.isSingedIn ? "SingUp" : "SingIn"}
+        </button>
         <div className="Auth">
           <form onSubmit={this.submitHandler}>
             {form}
 
             {/* <Buttonn>SIGNUP</Buttonn> */}
-            <button>SingUP</button>
+            {this.state.isSingedIn ? (
+              <button>Sing In</button>
+            ) : (
+              <button>SingUP</button>
+            )}
           </form>
 
           {/* {redirect}
@@ -183,8 +194,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAuth: (email, password) =>
-      dispatch(actionCreation.fetch_order(email, password)),
+    onAuth: (email, password, isSingedIn) =>
+      dispatch(actionCreation.fetch_order(email, password, isSingedIn)),
   };
 };
 

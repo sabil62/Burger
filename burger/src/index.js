@@ -12,8 +12,10 @@ import auth_reducer from "./store/reducer/auth_reducer";
 
 import { Provider } from "react-redux";
 
-import { createStore, applyMiddleware, combineReducers } from "redux";
+import { createStore, applyMiddleware, combineReducers, compose } from "redux";
 import thunk from "redux-thunk";
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const rootreducer = combineReducers({
   burger: burger_reducer,
@@ -21,7 +23,10 @@ const rootreducer = combineReducers({
   auth: auth_reducer,
 });
 
-const store = createStore(rootreducer, applyMiddleware(thunk));
+const store = createStore(
+  rootreducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 ReactDOM.render(
   <React.StrictMode>
