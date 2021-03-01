@@ -11,7 +11,7 @@ class Orders extends Component {
     load: false,
   };
   componentDidMount() {
-    this.props.onInitialDataLoad();
+    this.props.onInitialDataLoad(this.props.tokenR);
     // // axios
     // //   .get("orders.json")
     // //   .then((response) => {
@@ -28,7 +28,7 @@ class Orders extends Component {
 
   render() {
     let display = <Spinner />;
-    if (this.props.loadeR) {
+    if (this.props.loadedR) {
       display = this.props.dataFromFireR.map((order) => (
         <Order key={order.key} ingredients={order.ingredients} />
       ));
@@ -47,13 +47,15 @@ class Orders extends Component {
 const mapStateToProps = (state) => {
   return {
     dataFromFireR: state.order.dataFromFire,
-    loadeR: state.order.load,
+    loadedR: state.order.orderLoaded,
+    tokenR: state.auth.token,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onInitialDataLoad: () => dispatch(actionCreation.fetch_order()),
+    onInitialDataLoad: (token) =>
+      dispatch(actionCreation.fetch_order_order(token)),
   };
 };
 

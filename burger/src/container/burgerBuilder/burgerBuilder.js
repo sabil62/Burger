@@ -77,7 +77,9 @@ class BurgerBuilder extends Component {
       <OrderSummary
         ingredients={this.props.ingreR}
         price={this.props.priceR}
-        onOrder={() => this.props.onPostOrder(this.props.ingreR)}
+        onOrder={() =>
+          this.props.onPostOrder(this.props.ingreR, this.props.tokenR)
+        }
         onCancel={() => this.handleModalFalse()}
         onCheckout={() => this.handleCheckout()}
       />
@@ -198,6 +200,7 @@ const mapStateToProps = (state) => {
     priceR: state.burger.totalPrice,
     loadSpinner: state.order.loadSpinner,
     thingsLoaded: state.order.thingsLoaded,
+    tokenR: state.auth.token,
   };
 };
 
@@ -208,7 +211,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(actionCreation.add_ingredients(ingreNam)),
     onRemoveIngredient: (ingreNam) =>
       dispatch(actionCreation.remove_ingredients(ingreNam)),
-    onPostOrder: (ingre) => dispatch(actionCreations.post_order(ingre)),
+    onPostOrder: (ingre, token) =>
+      dispatch(actionCreations.post_order(ingre, token)),
   };
 };
 
