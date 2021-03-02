@@ -14,6 +14,9 @@ export const auth_reducer = (state = initState, action) => {
       };
       break;
     case "LOGOUT": //opposite of fetch_order
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("expirationDate");
       return {
         ...state,
         token: null,

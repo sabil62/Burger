@@ -10,22 +10,40 @@ import Logout from "./container/logout/logout";
 // import ContactForms from "./container/checkoutForm/checkoutFormAnother/contactForm";
 // import ContactFormss from "./container/checkout/checkoutForms/contactForms";
 
-function App() {
-  return (
-    <div className="App">
-      <Route path="/">
-        <Layouts />
-      </Route>
-      <Route path="/" exact component={BurgerBuilder} />
-      {/* this exact means if route is /lion then <burgerBuilder/> wont display but <Layouts/> will */}
-      {/* we can do both above techniques <Route pahtcomponent={Layouts}/> */}
-      <Route path="/order" component={Orders} />
-      <Route path="/checkout" component={Checkout} />
-      <Route path="/auth" component={Auth} />
-      <Route path="/logout" component={Logout} />
-      {/* <Route path="/checkout/contact-form" component={ContactFormss} /> */}
-    </div>
-  );
+import React, { Component } from "react";
+import * as actionCreation from "./store/actionCreation/authAction";
+
+//redux
+import { connect } from "react-redux";
+
+class App extends Component {
+  componentDidMount() {
+    this.props.onCheckAuthValue_localStorage();
+  }
+  render() {
+    return (
+      <div className="App">
+        <Route path="/">
+          <Layouts />
+        </Route>
+        <Route path="/" exact component={BurgerBuilder} />
+        {/* this exact means if route is /lion then <burgerBuilder/> wont display but <Layouts/> will */}
+        {/* we can do both above techniques <Route pahtcomponent={Layouts}/> */}
+        <Route path="/order" component={Orders} />
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/auth" component={Auth} />
+        <Route path="/logout" component={Logout} />
+        {/* <Route path="/checkout/contact-form" component={ContactFormss} /> */}
+      </div>
+    );
+  }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onCheckAuthValue_localStorage: () =>
+      dispatch(actionCreation.checklocalauth()),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(App);
